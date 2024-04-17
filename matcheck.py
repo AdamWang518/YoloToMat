@@ -26,6 +26,6 @@ def inspect_mat_file(file_path):
     return data_info
 
 # Usage example
-file_path = 'D:\\Github\\YoloToMat\\153_ann.mat'
+file_path = 'D:\\Github\\YoloToMat\\ann\\153_ann.mat'
 inspect_result = inspect_mat_file(file_path)
 print(inspect_result)

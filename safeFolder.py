@@ -51,7 +51,8 @@ def process_folder(folder_path, output_folder):
             else:
                 print(f"警告：{image_path}缺少標註文件")
 
+
 # 示例用法
-folder_path = 'D:\\Github\\YoloToMat\\ann'  # 包含圖片和標註的文件夾路徑
-output_folder = 'D:\\Github\\YoloToMat\\output'  # 指定輸出MAT檔案和圖片的目錄
+folder_path = 'C:\\Users\\User\\Pictures\\RandomLabel'  # 包含圖片和標註的文件夾路徑
+output_folder = 'C:\\Users\\User\\Pictures\\UnderWater'  # 指定輸出MAT檔案的目錄
 process_folder(folder_path, output_folder)

@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 from scipy.io import savemat
 import os
+import shutil  # 導入shutil模塊用於文件複製
 
 def yolo_to_mat(yolo_file_path, image_path, output_mat_path):
     # 讀取圖片以獲得其尺寸
@@ -32,6 +33,9 @@ def yolo_to_mat(yolo_file_path, image_path, output_mat_path):
     savemat(output_mat_path, mat_data)
 
 def process_folder(folder_path, output_folder):
+    # 確保輸出資料夾存在，如果不存在，則創建它
+    os.makedirs(output_folder, exist_ok=True)
+
     # 列出資料夾中的所有檔案
     for file_name in os.listdir(folder_path):
         if file_name.endswith('.png'):
@@ -39,13 +43,15 @@ def process_folder(folder_path, output_folder):
             image_path = os.path.join(folder_path, file_name)
             yolo_file_path = os.path.join(folder_path, base_name + '.txt')
             output_mat_path = os.path.join(output_folder, 'GT_{}.mat'.format(base_name))
+            output_image_path = os.path.join(output_folder, file_name)
 
             if os.path.exists(yolo_file_path):
                 yolo_to_mat(yolo_file_path, image_path, output_mat_path)
+                shutil.copy(image_path, output_image_path)  # 複製圖片文件到輸出資料夾
             else:
                 print(f"警告：{image_path}缺少標註文件")
 
 # 示例用法
 folder_path = 'D:\\Github\\YoloToMat\\ann'  # 包含圖片和標註的文件夾路徑
-output_folder = 'D:\\Github\\YoloToMat\\output'  # 指定輸出MAT檔案的目錄
+output_folder = 'D:\\Github\\YoloToMat\\output'  # 指定輸出MAT檔案和圖片的目錄
 process_folder(folder_path, output_folder)
